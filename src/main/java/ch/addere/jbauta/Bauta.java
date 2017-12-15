@@ -54,7 +54,7 @@ public class Bauta {
   /**
    * Initialise a new Bauta instance.
    */
-  Bauta() {
+  public Bauta() {
     try {
       ipv4Mask = InetAddress.getByAddress(IPV4_MASK);
       ipv6Mask = InetAddress.getByAddress(IPV6_MASK);
