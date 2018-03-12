@@ -7,6 +7,7 @@ package ch.addere.jbauta;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Bauta IPv4 context.
@@ -32,10 +33,8 @@ public class BautaV4 extends Bauta {
    * @return Anonymised IPv4 instance
    * @throws UnknownHostException If provided IPv4 is not valid
    */
-  public Inet4Address maskAny(final Inet4Address addressToMask) throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
+  public Inet4Address maskAny(@NotNull final Inet4Address addressToMask)
+      throws UnknownHostException {
 
     return (Inet4Address) maskAnyIPAddress(addressToMask);
   }
@@ -49,11 +48,8 @@ public class BautaV4 extends Bauta {
    * @return Anonymised IPv4 instance
    * @throws UnknownHostException If provided IPv4 is not valid
    */
-  public Inet4Address maskPublicRoutableOnly(final Inet4Address addressToMask)
+  public Inet4Address maskPublicRoutableOnly(@NotNull final Inet4Address addressToMask)
       throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
 
     return (Inet4Address) maskPublicRoutableIPAddressOnly(addressToMask);
   }

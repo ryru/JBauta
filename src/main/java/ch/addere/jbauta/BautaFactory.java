@@ -8,6 +8,7 @@ package ch.addere.jbauta;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.UnknownHostException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Bauta Factory for creating IPv4 or IPv6 masquerading context.
@@ -67,10 +68,7 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV4 with non-default bitmask
    */
-  public BautaV4 createIPv4(final Inet4Address maskingAddress) {
-    if (maskingAddress == null) {
-      throw new IllegalArgumentException("NULL reference: maskingAddress");
-    }
+  public BautaV4 createIPv4(@NotNull final Inet4Address maskingAddress) {
 
     return new BautaV4(maskingAddress);
   }
@@ -87,10 +85,7 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV6 with non-default bitmask
    */
-  public BautaV6 createIPv6(final Inet6Address maskingAddress) {
-    if (maskingAddress == null) {
-      throw new IllegalArgumentException("NULL reference: maskingAddress");
-    }
+  public BautaV6 createIPv6(@NotNull final Inet6Address maskingAddress) {
 
     return new BautaV6(maskingAddress);
   }

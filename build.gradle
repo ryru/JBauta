@@ -26,10 +26,12 @@ repositories {
 
 dependencies {
     compile(
-            'org.junit.jupiter:junit-jupiter-api:5.0.1'
+            'org.junit.jupiter:junit-jupiter-api:5.0.1',
+            'com.intellij:annotations:+@jar'
     )
     testCompile(
-            'org.junit.jupiter:junit-jupiter-api:5.0.1'
+            'org.junit.jupiter:junit-jupiter-api:5.0.1',
+            'com.intellij:annotations:+@jar'
     )
     testRuntime(
             'org.junit.jupiter:junit-jupiter-engine:5.0.1',

@@ -7,6 +7,7 @@ package ch.addere.jbauta;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Masquerading logic for both IPv4 and IPv6.
@@ -21,10 +22,7 @@ public abstract class Bauta {
    *
    * @param bitmask IPv4 or IPv6 bitmask for masquerading
    */
-  protected Bauta(final InetAddress bitmask) {
-    if (bitmask == null) {
-      throw new IllegalArgumentException("NULL reference: bitmask");
-    }
+  protected Bauta(@NotNull final InetAddress bitmask) {
 
     maskingAddress = bitmask;
   }
@@ -36,11 +34,8 @@ public abstract class Bauta {
    * @return Masqueraded IP address
    * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
    */
-  protected InetAddress maskAnyIPAddress(final InetAddress addressToMask)
+  protected InetAddress maskAnyIPAddress(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
 
     return masqueradeIPAddress(addressToMask);
   }
@@ -52,11 +47,8 @@ public abstract class Bauta {
    * @return Masqueraded IP address
    * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
    */
-  protected InetAddress maskPublicRoutableIPAddressOnly(final InetAddress addressToMask)
+  protected InetAddress maskPublicRoutableIPAddressOnly(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
 
     final boolean isNotPublicRoutable =
         addressToMask.isAnyLocalAddress() ||
@@ -67,11 +59,8 @@ public abstract class Bauta {
     return isNotPublicRoutable ? addressToMask : masqueradeIPAddress(addressToMask);
   }
 
-  private InetAddress masqueradeIPAddress(final InetAddress addressToMask)
+  private InetAddress masqueradeIPAddress(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
 
     int length = getLengthOfAddress(addressToMask);
 
@@ -86,7 +75,7 @@ public abstract class Bauta {
     return InetAddress.getByAddress(outputAddress);
   }
 
-  private int getLengthOfAddress(final InetAddress address) {
+  private int getLengthOfAddress(@NotNull final InetAddress address) {
     return address.getAddress().length;
   }
 

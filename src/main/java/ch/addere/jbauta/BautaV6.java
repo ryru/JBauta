@@ -7,6 +7,7 @@ package ch.addere.jbauta;
 
 import java.net.Inet6Address;
 import java.net.UnknownHostException;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Bauta IPv6 context.
@@ -19,7 +20,7 @@ public class BautaV6 extends Bauta {
    *
    * @param mask IPv6 address to masquerade
    */
-  public BautaV6(final Inet6Address mask) {
+  public BautaV6(@NotNull final Inet6Address mask) {
     super(mask);
   }
 
@@ -32,10 +33,8 @@ public class BautaV6 extends Bauta {
    * @return Anonymised IPv6 instance
    * @throws UnknownHostException If provided IPv6 is not valid
    */
-  public Inet6Address maskAny(final Inet6Address addressToMask) throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
+  public Inet6Address maskAny(@NotNull final Inet6Address addressToMask)
+      throws UnknownHostException {
 
     return (Inet6Address) maskAnyIPAddress(addressToMask);
   }
@@ -49,11 +48,8 @@ public class BautaV6 extends Bauta {
    * @return Anonymised IPv6 instance
    * @throws UnknownHostException If provided IPv6 is not valid
    */
-  public Inet6Address maskPublicRoutableOnly(final Inet6Address addressToMask)
+  public Inet6Address maskPublicRoutableOnly(@NotNull final Inet6Address addressToMask)
       throws UnknownHostException {
-    if (addressToMask == null) {
-      throw new IllegalArgumentException("NULL reference: addressToMask");
-    }
 
     return (Inet6Address) maskPublicRoutableIPAddressOnly(addressToMask);
   }
