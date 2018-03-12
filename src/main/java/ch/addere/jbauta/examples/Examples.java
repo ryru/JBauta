@@ -18,8 +18,6 @@ import java.net.UnknownHostException;
  *
  * This snippets are also used in the readme.md documentation.
  *
- * @author Pascal K. (ryru@addere.ch)
- * @version $Id$
  */
 public class Examples {
 
