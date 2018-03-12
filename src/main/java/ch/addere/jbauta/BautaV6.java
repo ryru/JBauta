@@ -11,8 +11,6 @@ import java.net.UnknownHostException;
 /**
  * Bauta IPv6 context.
  *
- * @author Pascal K. (ryru@addere.ch)
- * @version $Id$
  */
 public class BautaV6 extends Bauta {
 

@@ -11,8 +11,6 @@ import java.net.UnknownHostException;
 /**
  * Masquerading logic for both IPv4 and IPv6.
  *
- * @author Pascal K. (ryru@addere.ch)
- * @version $Id$
  */
 public abstract class Bauta {
 

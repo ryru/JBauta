@@ -17,8 +17,6 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit tests for BautaFactory
  *
- * @author Pascal K. (ryru@addere.ch)
- * @version $Id$
  */
 class BautaFactoryTest {
 

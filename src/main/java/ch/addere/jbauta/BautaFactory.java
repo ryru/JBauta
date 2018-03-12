@@ -12,8 +12,6 @@ import java.net.UnknownHostException;
 /**
  * Bauta Factory for creating IPv4 or IPv6 masquerading context.
  *
- * @author Pascal K. (ryru@addere.ch)
- * @version $Id$
  */
 public class BautaFactory {
 
