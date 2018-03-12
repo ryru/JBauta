@@ -67,7 +67,7 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV4 with non-default bitmask
    */
-  public BautaV4 createIPv4(Inet4Address maskingAddress) {
+  public BautaV4 createIPv4(final Inet4Address maskingAddress) {
     if (maskingAddress == null) {
       throw new IllegalArgumentException("NULL reference: maskingAddress");
     }
@@ -87,7 +87,7 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV6 with non-default bitmask
    */
-  public BautaV6 createIPv6(Inet6Address maskingAddress) {
+  public BautaV6 createIPv6(final Inet6Address maskingAddress) {
     if (maskingAddress == null) {
       throw new IllegalArgumentException("NULL reference: maskingAddress");
     }

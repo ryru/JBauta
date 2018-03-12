@@ -86,7 +86,7 @@ public abstract class Bauta {
     return InetAddress.getByAddress(outputAddress);
   }
 
-  private int getLengthOfAddress(InetAddress address) {
+  private int getLengthOfAddress(final InetAddress address) {
     return address.getAddress().length;
   }
 
