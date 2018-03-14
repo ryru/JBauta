@@ -34,7 +34,7 @@ public abstract class Bauta {
    * @return Masqueraded IP address
    * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
    */
-  protected InetAddress maskAnyIPAddress(@NotNull final InetAddress addressToMask)
+  InetAddress maskAnyIPAddress(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
 
     return masqueradeIPAddress(addressToMask);
@@ -47,7 +47,7 @@ public abstract class Bauta {
    * @return Masqueraded IP address
    * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
    */
-  protected InetAddress maskPublicRoutableIPAddressOnly(@NotNull final InetAddress addressToMask)
+  InetAddress maskPublicRoutableIPAddressOnly(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
 
     final boolean isNotPublicRoutable =
