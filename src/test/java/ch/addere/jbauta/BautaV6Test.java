@@ -6,7 +6,6 @@
 package ch.addere.jbauta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -23,26 +22,9 @@ class BautaV6Test {
   private static BautaFactory factory;
 
   @BeforeAll
-  public static void beforeAll() {
+  static void beforeAll() {
     factory = new BautaFactory();
   }
-
-  @Test
-  void testMaskNullReference0() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      BautaV4 bta = factory.createIPv4();
-      bta.maskAny(null);
-    });
-  }
-
-  @Test
-  void testMaskNullReference1() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      BautaV4 bta = factory.createIPv4();
-      bta.maskPublicRoutableOnly(null);
-    });
-  }
-
 
   @Test
   void testIPv6DefaultMasking0() {
