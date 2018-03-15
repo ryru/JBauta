@@ -50,13 +50,13 @@ public abstract class Bauta {
   InetAddress maskPublicRoutableIPAddressOnly(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
 
-    final boolean isNotPublicRoutable =
+    final boolean isPrivateAddress =
         addressToMask.isAnyLocalAddress() ||
             addressToMask.isLoopbackAddress() ||
             addressToMask.isLinkLocalAddress() ||
             addressToMask.isSiteLocalAddress();
 
-    return isNotPublicRoutable ? addressToMask : masqueradeIPAddress(addressToMask);
+    return isPrivateAddress ? addressToMask : masqueradeIPAddress(addressToMask);
   }
 
   private InetAddress masqueradeIPAddress(@NotNull final InetAddress addressToMask)
