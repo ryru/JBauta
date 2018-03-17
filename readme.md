@@ -30,9 +30,9 @@ First off a IP version 4 factory is needed:
 
 For example the IP address `203.0.113.1` shall be masked, the most simple way to achieve this is:
 ```
-  Inet4Address ipV4Public = (Inet4Address) InetAddress.getByName("203.0.113.42");
+  InetAddress ipV4Public = InetAddress.getByName("203.0.113.42");
   
-  Inet4Address maskedV4 = btaV4.maskAny(ipV4Public);
+  InetAddress maskedV4 = btaV4.maskAny(ipV4Public);
   
   System.out.println("Input : " + ipV4Public);
   System.out.println("Output: " + maskedV4);
@@ -46,9 +46,9 @@ For example the IP address `203.0.113.1` shall be masked, the most simple way to
 
 Keeping local IP addresses in the log file is possible by using `maskPublicRoutableOnly()`:
 ```
-  Inet4Address ipV4Private = (Inet4Address) InetAddress.getByName("192.168.2.42");
+  InetAddress ipV4Private = InetAddress.getByName("192.168.2.42");
   
-  Inet4Address notMaskedV4 = btaV4.maskPublicRoutableOnly(ipV4Private);
+  InetAddress notMaskedV4 = btaV4.maskPublicRoutableOnly(ipV4Private);
   
   System.out.println("Input : " + ipV4Private);
   System.out.println("Output: " + notMaskedV4);
@@ -60,6 +60,24 @@ Keeping local IP addresses in the log file is possible by using `maskPublicRouta
   Output: /192.168.2.42
 ```
 
+Use a alternative masquerading by defining a custom bitmask in CIDR notation:
+```
+  BautaFactory factory = new BautaFactory();
+  BautaV4 btaV4 = factory.createIPv4(9);
+
+  InetAddress ipV4Private = InetAddress.getByName("192.168.2.42");
+  
+  InetAddress customCIDRBitmask = btaV4.maskAny(ipV4Private);
+  
+  System.out.println("Input : " + ipV4Private);
+  System.out.println("Output: " + customCIDRBitmask);
+  
+  /*
+   * Output is
+   */
+  Input : /192.168.2.42
+  Output: /192.128.0.0
+```
 
 ### IP version 6
 First off a IP version 6 factory is needed:
@@ -70,9 +88,9 @@ First off a IP version 6 factory is needed:
 
 For example the IP address `2001:DB8::42` shall be masked, the most simple way to achieve this is:
 ```
-  Inet6Address ipV6Public = (Inet6Address) InetAddress.getByName("2001:DB8::42");
+  InetAddress ipV6Public = InetAddress.getByName("2001:DB8::42");
   
-  Inet6Address ipV6Default = btaV6Default.maskAny(ipV6Public);
+  InetAddress ipV6Default = btaV6Default.maskAny(ipV6Public);
   
   System.out.println("Input : " + ipV6Public);
   System.out.println("Output: " + ipV6Default);
@@ -86,12 +104,12 @@ For example the IP address `2001:DB8::42` shall be masked, the most simple way t
 
 A more advanced example scenario is the keep, for example, only the MAC address `00-53-00-AA-BB-CC` part of an IP version 6 address. To achieve this use this:
 ```
-    Inet6Address ipV6Mask = (Inet6Address) InetAddress.getByName("0:0:0:0:FFFF:FF00:00FF:FFFF");
-    Inet6Address ipV6MAC = (Inet6Address) InetAddress.getByName("2001:DB8::0053:00FF:FEAA:BBCC");
+    InetAddress ipV6Mask = InetAddress.getByName("0:0:0:0:FFFF:FF00:00FF:FFFF");
+    InetAddress ipV6MAC = InetAddress.getByName("2001:DB8::0053:00FF:FEAA:BBCC");
     
     BautaV6 btaV6Advanced = factory.createIPv6(ipV6Mask);
     
-    Inet6Address ipV6MACOnly = btaV6Advanced.maskAny(ipV6MAC);
+    InetAddress ipV6MACOnly = btaV6Advanced.maskAny(ipV6MAC);
     
     System.out.println("Input : " + ipV6MAC);
     System.out.println("Output: " + ipV6MACOnly);
