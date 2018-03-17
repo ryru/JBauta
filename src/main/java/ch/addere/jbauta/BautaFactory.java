@@ -5,8 +5,7 @@
 
 package ch.addere.jbauta;
 
-import java.net.Inet4Address;
-import java.net.Inet6Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,23 +32,7 @@ public class BautaFactory {
    */
   public BautaV4 createIPv4() {
     try {
-      return new BautaV4((Inet4Address) Inet4Address.getByAddress(IPV4_DEFAULT_MASK));
-    } catch (UnknownHostException e) {
-      throw new AssertionError(
-          "this should never happen: the IP address is supposed to be always valid", e);
-    }
-  }
-
-  /**
-   * Create an IPv6 default bitmask context.
-   *
-   * An instance of BautaV6 with a default bitmask truncates the last 96 bit of a given address. Therefor the default IPv6 bitmask is set to FFFF:FFFF:: in IPv6 short notation. This is the privacy by default method.
-   *
-   * @return Instance of BautaV6 with default bitmask
-   */
-  public BautaV6 createIPv6() {
-    try {
-      return new BautaV6((Inet6Address) Inet6Address.getByAddress(IPV6_DEFAULT_MASK));
+      return new BautaV4(InetAddress.getByAddress(IPV4_DEFAULT_MASK));
     } catch (UnknownHostException e) {
       throw new AssertionError(
           "this should never happen: the IP address is supposed to be always valid", e);
@@ -68,9 +51,25 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV4 with non-default bitmask
    */
-  public BautaV4 createIPv4(@NotNull final Inet4Address maskingAddress) {
+  public BautaV4 createIPv4(@NotNull final InetAddress maskingAddress) {
 
     return new BautaV4(maskingAddress);
+  }
+
+  /**
+   * Create an IPv6 default bitmask context.
+   *
+   * An instance of BautaV6 with a default bitmask truncates the last 96 bit of a given address. Therefor the default IPv6 bitmask is set to FFFF:FFFF:: in IPv6 short notation. This is the privacy by default method.
+   *
+   * @return Instance of BautaV6 with default bitmask
+   */
+  public BautaV6 createIPv6() {
+    try {
+      return new BautaV6(InetAddress.getByAddress(IPV6_DEFAULT_MASK));
+    } catch (UnknownHostException e) {
+      throw new AssertionError(
+          "this should never happen: the IP address is supposed to be always valid", e);
+    }
   }
 
   /**
@@ -85,7 +84,7 @@ public class BautaFactory {
    * @param maskingAddress Bitmask address to use for masquerading
    * @return Instance of BautaV6 with non-default bitmask
    */
-  public BautaV6 createIPv6(@NotNull final Inet6Address maskingAddress) {
+  public BautaV6 createIPv6(@NotNull final InetAddress maskingAddress) {
 
     return new BautaV6(maskingAddress);
   }

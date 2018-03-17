@@ -5,7 +5,7 @@
 
 package ch.addere.jbauta;
 
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,13 +15,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BautaV4 extends Bauta {
 
+  private static final int IPV4_BYTE_COUNT = 4;
+
   /**
    * Create BautaV4 instance.
    *
    * @param mask IPv4 address to masquerade
    */
-  public BautaV4(final Inet4Address mask) {
+  public BautaV4(final InetAddress mask) {
     super(mask);
+
+    if (!isIPv4(mask)) {
+      throw new IllegalArgumentException("Error: mask is not a valid IP version 4 address");
+    }
   }
 
   /**
@@ -33,10 +39,14 @@ public class BautaV4 extends Bauta {
    * @return Anonymised IPv4 instance
    * @throws UnknownHostException If provided IPv4 is not valid
    */
-  public Inet4Address maskAny(@NotNull final Inet4Address addressToMask)
+  public InetAddress maskAny(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
 
-    return (Inet4Address) maskAnyIPAddress(addressToMask);
+    if (isIPv4(addressToMask)) {
+      return maskAnyIPAddress(addressToMask);
+    } else {
+      return addressToMask;
+    }
   }
 
   /**
@@ -48,10 +58,25 @@ public class BautaV4 extends Bauta {
    * @return Anonymised IPv4 instance
    * @throws UnknownHostException If provided IPv4 is not valid
    */
-  public Inet4Address maskPublicRoutableOnly(@NotNull final Inet4Address addressToMask)
+  public InetAddress maskPublicRoutableOnly(@NotNull final InetAddress addressToMask)
       throws UnknownHostException {
 
-    return (Inet4Address) maskPublicRoutableIPAddressOnly(addressToMask);
+    if (isIPv4(addressToMask)) {
+      return maskPublicRoutableIPAddressOnly(addressToMask);
+    } else {
+      return addressToMask;
+    }
+  }
+
+  private boolean isIPv4(final InetAddress address) {
+    boolean isIPv4 = true;
+    int addressByteCount = address.getAddress().length;
+
+    if (addressByteCount != IPV4_BYTE_COUNT) {
+      isIPv4 = false;
+    }
+
+    return isIPv4;
   }
 
 }

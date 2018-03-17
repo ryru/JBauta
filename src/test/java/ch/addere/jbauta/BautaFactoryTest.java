@@ -7,8 +7,6 @@ package ch.addere.jbauta;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.net.Inet4Address;
-import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,12 +25,12 @@ class BautaFactoryTest {
       (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
       (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
       (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00};
-  private static Inet4Address ipv4Mask1;
-  private static Inet6Address ipv6Mask1;
+  private static InetAddress ipv4Mask1;
+  private static InetAddress ipv6Mask1;
 
   static {
     try {
-      ipv4Mask1 = (Inet4Address) InetAddress.getByAddress(IPV4_MASK_1);
+      ipv4Mask1 = InetAddress.getByAddress(IPV4_MASK_1);
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }
@@ -40,7 +38,7 @@ class BautaFactoryTest {
 
   static {
     try {
-      ipv6Mask1 = (Inet6Address) InetAddress.getByAddress(IPV6_MASK_1);
+      ipv6Mask1 = InetAddress.getByAddress(IPV6_MASK_1);
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }
