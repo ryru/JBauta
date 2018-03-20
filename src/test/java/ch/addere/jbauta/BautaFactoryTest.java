@@ -17,7 +17,6 @@ import org.junit.jupiter.api.function.Executable;
 
 /**
  * JUnit tests for BautaFactory
- *
  */
 class BautaFactoryTest {
 
@@ -66,12 +65,6 @@ class BautaFactoryTest {
   }
 
   @Test
-  void createIPv4DfaultMask() {
-    BautaV4 testObj = factory.createIPv4();
-    assertTrue(testObj.getClass() == BautaV4.class);
-  }
-
-  @Test
   void createIPv6DefaultMask() {
     BautaV6 testObj = factory.createIPv6();
     assertTrue(testObj.getClass() == BautaV6.class);
@@ -90,23 +83,15 @@ class BautaFactoryTest {
   }
 
   @Test
-  void testIPv4SlashBitmask1() {
+  void testIPv4SlashBitmask1() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(0);
-    try {
-      bta.maskAny(fullySetv4);
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    bta.maskAny(fullySetv4);
   }
 
   @Test
-  void testIPv4SlashBitmask2() {
+  void testIPv4SlashBitmask2() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(32);
-    try {
-      bta.maskAny(fullySetv4);
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    bta.maskAny(fullySetv4);
   }
 
   @Test
@@ -130,167 +115,111 @@ class BautaFactoryTest {
   }
 
   @Test
-  void testIPv4SlashBitmask5() {
+  void testIPv4SlashBitmask5() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(0);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("0.0.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("0.0.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask6() {
+  void testIPv4SlashBitmask6() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(8);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.0.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.0.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask7() {
+  void testIPv4SlashBitmask7() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(16);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.255.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.255.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask8() {
+  void testIPv4SlashBitmask8() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(24);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.255.255.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.255.255.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask9() {
+  void testIPv4SlashBitmask9() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(32);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.255.255.255");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.255.255.255");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask10() {
+  void testIPv4SlashBitmask10() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(9);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.128.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.128.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask11() {
+  void testIPv4SlashBitmask11() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(10);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.192.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.192.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask12() {
+  void testIPv4SlashBitmask12() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(11);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.224.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.224.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask13() {
+  void testIPv4SlashBitmask13() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(12);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.240.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.240.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask14() {
+  void testIPv4SlashBitmask14() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(13);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.248.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.248.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask15() {
+  void testIPv4SlashBitmask15() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(14);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.252.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.252.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv4SlashBitmask16() {
+  void testIPv4SlashBitmask16() throws UnknownHostException {
     BautaV4 bta = factory.createIPv4(15);
-    try {
-      InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
-      InetAddress outputShouldBe = InetAddress.getByName("255.254.0.0");
-      assertEquals(outputShouldBe, bta.maskAny(ipv4));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv4 = InetAddress.getByName("255.255.255.255");
+    InetAddress outputShouldBe = InetAddress.getByName("255.254.0.0");
+    assertEquals(outputShouldBe, bta.maskAny(ipv4));
   }
 
   @Test
-  void testIPv6SlashBitmask1() {
+  void testIPv6SlashBitmask1() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(0);
-    try {
-      bta.maskAny(fullySetv6);
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    bta.maskAny(fullySetv6);
   }
 
   @Test
-  void testIPv6SlashBitmask2() {
+  void testIPv6SlashBitmask2() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(32);
-    try {
-      bta.maskAny(fullySetv6);
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    bta.maskAny(fullySetv6);
   }
 
   @Test
@@ -314,146 +243,98 @@ class BautaFactoryTest {
   }
 
   @Test
-  void testIPv6SlashBitmask5() {
+  void testIPv6SlashBitmask5() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(0);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask6() {
+  void testIPv6SlashBitmask6() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(16);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask7() {
+  void testIPv6SlashBitmask7() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(32);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:FFFF::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:FFFF::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask8() {
+  void testIPv6SlashBitmask8() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(48);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:FFFF:FFFF::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:FFFF:FFFF::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask9() {
+  void testIPv6SlashBitmask9() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(128);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = fullySetv6;
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = fullySetv6;
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask10() {
+  void testIPv6SlashBitmask10() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(17);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:8000::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:8000::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask11() {
+  void testIPv6SlashBitmask11() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(18);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:C000::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:C000::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask12() {
+  void testIPv6SlashBitmask12() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(19);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:E000::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:E000::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask13() {
+  void testIPv6SlashBitmask13() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(20);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:F000::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:F000::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask14() {
+  void testIPv6SlashBitmask14() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(21);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:F800::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:F800::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask15() {
+  void testIPv6SlashBitmask15() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(22);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:FC00::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:FC00::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 
   @Test
-  void testIPv6SlashBitmask16() {
+  void testIPv6SlashBitmask16() throws UnknownHostException {
     BautaV6 bta = factory.createIPv6(23);
-    try {
-      InetAddress ipv6 = fullySetv6;
-      InetAddress outputShouldBe = InetAddress.getByName("FFFF:FE00::");
-      assertEquals(outputShouldBe, bta.maskAny(ipv6));
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
+    InetAddress ipv6 = fullySetv6;
+    InetAddress outputShouldBe = InetAddress.getByName("FFFF:FE00::");
+    assertEquals(outputShouldBe, bta.maskAny(ipv6));
   }
 }
