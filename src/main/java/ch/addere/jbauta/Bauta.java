@@ -7,76 +7,54 @@ package ch.addere.jbauta;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
 /**
- * Masquerading logic for both IPv4 and IPv6.
- *
+ * Masquerading logic for both IP version 4 and 6.
  */
-public abstract class Bauta {
+public class Bauta {
 
-  private InetAddress maskingAddress;
+  final private Masquerade calc;
 
   /**
-   * Bauta object with IP bitmask.
+   * Initialise a Bauta context by using the BautaFactory class.
    *
-   * @param bitmask IPv4 or IPv6 bitmask for masquerading
+   * <p>Precondition: ipv4Mask is a valid IP version 4 address and not equals null</p>
+   * <p>Precondition: ipv6MAsk is a valid IP version 6 address and not equals null</p>
+   *
+   * @param ipv4Mask A valid IP version 4 address as masking reference
+   * @param ipv6Mask A valid IP version 6 address as masking reference
    */
-  protected Bauta(@NotNull final InetAddress bitmask) {
-
-    maskingAddress = bitmask;
+  protected Bauta(final InetAddress ipv4Mask, final InetAddress ipv6Mask) {
+    calc = new Masquerade(ipv4Mask, ipv6Mask);
   }
 
   /**
    * Masquerade any IP address with the bitmask set in the constructor of this object.
    *
-   * @param addressToMask IP address to mask
-   * @return Masqueraded IP address
-   * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
+   * @param IPAddress IP address to mask
+   * @return A masqueraded IP address
+   * @throws UnknownHostException If {@code IPAddress} is not a valid IP address
    */
-  InetAddress maskAnyIPAddress(@NotNull final InetAddress addressToMask)
-      throws UnknownHostException {
+  public InetAddress maskAny(final InetAddress IPAddress) throws UnknownHostException {
+    InetAddress mask = Objects.requireNonNull(IPAddress);
 
-    return masqueradeIPAddress(addressToMask);
+    return calc.maskAnyAddress(mask);
   }
 
   /**
    * Masquerade only public routable IP addresses with the bitmask set in the constructor of this object.
    *
-   * @param addressToMask IP address to mask
-   * @return Masqueraded IP address
+   * @param IPAddress IP address to mask
+   * @return A masqueraded IP address
    * @throws UnknownHostException If {@code addressToMask} is not a valid IP address
    */
-  InetAddress maskPublicRoutableIPAddressOnly(@NotNull final InetAddress addressToMask)
+  public InetAddress maskPublicRoutableOnly(final InetAddress IPAddress)
       throws UnknownHostException {
+    InetAddress mask = Objects.requireNonNull(IPAddress);
 
-    final boolean isPrivateAddress =
-        addressToMask.isAnyLocalAddress() ||
-            addressToMask.isLoopbackAddress() ||
-            addressToMask.isLinkLocalAddress() ||
-            addressToMask.isSiteLocalAddress();
-
-    return isPrivateAddress ? addressToMask : masqueradeIPAddress(addressToMask);
+    return calc.maskPublicRoutableIPAddressOnly(mask);
   }
 
-  private InetAddress masqueradeIPAddress(@NotNull final InetAddress addressToMask)
-      throws UnknownHostException {
-
-    int length = getLengthOfAddress(addressToMask);
-
-    byte[] inputAddress = addressToMask.getAddress();
-    byte[] mask = maskingAddress.getAddress();
-    byte[] outputAddress = new byte[length];
-
-    for (int i = 0; i < length; i++) {
-      outputAddress[i] = (byte) (inputAddress[i] & mask[i]);
-    }
-
-    return InetAddress.getByAddress(outputAddress);
-  }
-
-  private int getLengthOfAddress(@NotNull final InetAddress address) {
-    return address.getAddress().length;
-  }
 
 }
