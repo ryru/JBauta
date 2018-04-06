@@ -71,7 +71,7 @@ public class Masquerade {
     return isPrivateAddress ? addressToMask : v4v6Wrapper(addressToMask);
   }
 
-  private InetAddress v4v6Wrapper(InetAddress addressToMask) throws UnknownHostException {
+  private InetAddress v4v6Wrapper(final InetAddress addressToMask) throws UnknownHostException {
     if (AddressUtil.isIPv4(addressToMask)) {
       return masqueradeIPAddress(addressToMask, v4Mask);
     } else if (AddressUtil.isIPv6(addressToMask)) {

@@ -80,7 +80,7 @@ public class AddressUtil {
 
     isValidCIDR = (ipv4CIDR >= IP_CIDR_MINIMUM) && (ipv4CIDR <= IPV4_CIDR_MAXIMUM);
 
-    return !isValidCIDR;
+    return isValidCIDR;
   }
 
   /**
@@ -94,7 +94,7 @@ public class AddressUtil {
 
     isValidCIDR = (ipv6CIDR >= IP_CIDR_MINIMUM) && (ipv6CIDR <= IPV6_CIDR_MAXIMUM);
 
-    return !isValidCIDR;
+    return isValidCIDR;
   }
 
   /**
@@ -105,7 +105,7 @@ public class AddressUtil {
    * @param bitmask A bitmask
    * @return InetAddress object with an IP address based on the bitmask
    */
-  protected static InetAddress createIPv4FromBitmask(final int bitmask) {
+  protected static InetAddress createIPv4FromBitmask(int bitmask) {
     if (AddressUtil.isValidIPv4CIDR(bitmask)) {
       throw new IllegalArgumentException("Invalid IPv4 bitmask. Has to be between 0 and 32");
     }
@@ -128,7 +128,7 @@ public class AddressUtil {
    * @param bitmask A bitmask
    * @return InetAddress object with an IP address based on the bitmask
    */
-  protected static InetAddress createIPv6FromBitmask(final int bitmask) {
+  protected static InetAddress createIPv6FromBitmask(int bitmask) {
     if (AddressUtil.isValidIPv6CIDR(bitmask)) {
       throw new IllegalArgumentException("Invalid IPv6 bitmask. Has to be between 0 and 128");
     }

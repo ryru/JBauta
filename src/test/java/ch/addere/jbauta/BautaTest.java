@@ -51,11 +51,22 @@ class BautaTest {
   }
 
   @Test
-  @DisplayName("Test null reference masking")
-  void testNullMasking() {
+  @DisplayName("Test null reference any masking")
+  void testNullMasking0() {
     Executable nullInitialisation = () -> {
       Bauta bta = factory.createDefaultIPMask();
       bta.maskAny(null);
+    };
+
+    assertThrows(NullPointerException.class, nullInitialisation);
+  }
+
+  @Test
+  @DisplayName("Test null reference non-routeable masking")
+  void testNullMasking1() {
+    Executable nullInitialisation = () -> {
+      Bauta bta = factory.createDefaultIPMask();
+      bta.maskPublicRoutableOnly(null);
     };
 
     assertThrows(NullPointerException.class, nullInitialisation);

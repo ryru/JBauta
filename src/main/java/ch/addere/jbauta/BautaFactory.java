@@ -87,11 +87,11 @@ public class BautaFactory {
   }
 
   private void checkBitmaskParameter(int ipv4, int ipv6) {
-    if (AddressUtil.isValidIPv4CIDR(ipv4)) {
+    if (!AddressUtil.isValidIPv4CIDR(ipv4)) {
       throw new IllegalArgumentException("Invalid IPv4 bitmask. Has to be between 0 and 32");
     }
 
-    if (AddressUtil.isValidIPv6CIDR(ipv6)) {
+    if (!AddressUtil.isValidIPv6CIDR(ipv6)) {
       throw new IllegalArgumentException("Invalid IPv6 bitmask. Has to be between 0 and 128");
     }
   }
